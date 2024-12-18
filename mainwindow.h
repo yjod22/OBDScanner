@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 
@@ -30,4 +29,3 @@ private:
     ProtocolHandler serialWrite_;
     ProtocolHandler protocolHandler_;
 };
-#endif // MAINWINDOW_H
