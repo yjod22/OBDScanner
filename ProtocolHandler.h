@@ -18,15 +18,13 @@ public:
 
     bool openPort(const QString &portName, qint32 baudRate);
     void closePort();
-    void writeData(const QByteArray &data);
-    QByteArray readData();
     bool isOpen() const;
-
-private slots:
-    void handleReadyRead();
+    void writeData(const QByteArray &data);
 
 private:
-    QSerialPort *m_serialPort;
+    void onReadyRead();
+
+    QSerialPort *serialPort_;
     StreamDecoder streamDecoder_;
 };
 

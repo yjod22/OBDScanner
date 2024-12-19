@@ -1,26 +1,29 @@
-#include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include <ui_MainWindow.h>
+
+#include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui_(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    ui_->setupUi(this);
 
+    connect(ui_->connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
+    connect(ui_->sendPart1Button, &QPushButton::clicked, this, &MainWindow::onSendPart1ButtonClicked);
+    connect(ui_->sendPart2Button, &QPushButton::clicked, this, &MainWindow::onSendPart2ButtonClicked);
 
     if(!serialWrite_.isOpen())
     {
         serialWrite_.openPort("COM7", 115200);
     }
-
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete ui_;
 }
 
-void MainWindow::on_connectButton_clicked()
+void MainWindow::onConnectButtonClicked()
 {
     if(!protocolHandler_.isOpen())
     {
@@ -29,7 +32,7 @@ void MainWindow::on_connectButton_clicked()
 }
 
 
-void MainWindow::on_sendPart1Button_clicked()
+void MainWindow::onSendPart1ButtonClicked()
 {
     if(serialWrite_.isOpen())
     {
@@ -39,7 +42,7 @@ void MainWindow::on_sendPart1Button_clicked()
 }
 
 
-void MainWindow::on_sendPart2Button_clicked()
+void MainWindow::onSendPart2ButtonClicked()
 {
     if(serialWrite_.isOpen())
     {

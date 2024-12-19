@@ -1,13 +1,13 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 
 #include "ProtocolHandler.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 QT_END_NAMESPACE
 
@@ -18,16 +18,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-private slots:
-    void on_connectButton_clicked();
-    void on_sendPart1Button_clicked();
-    void on_sendPart2Button_clicked();
+    void onConnectButtonClicked();
+    void onSendPart1ButtonClicked();
+    void onSendPart2ButtonClicked();
 
 private:
-    Ui::MainWindow *ui;
-
+    Ui::MainWindow *ui_;
     ProtocolHandler serialWrite_;
     ProtocolHandler protocolHandler_;
 };
-#endif // MAINWINDOW_H
