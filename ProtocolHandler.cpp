@@ -1,4 +1,4 @@
-#include "ProtocolHandler.h"
+#include "ProtocolHandler.hpp"
 
 ProtocolHandler::ProtocolHandler(QObject *parent)
     : QObject(parent), serialPort_(new QSerialPort(this))
@@ -81,8 +81,8 @@ void ProtocolHandler::onReadyRead()
                         qDebug() << static_cast<int>(byte) << " ";
                     }
 
-                    // qDebug() << "Parsing packet...";
-                    // packetParser_(result.data);
+                    qDebug() << "Parsing packet...";
+                    packetParser_.parse(result.data);
                     break;
                 case DecodeResult::Ongoing:
                     qDebug() << "Waiting for more data...";

@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 
-#include "ProtocolHandler.h"
+#include "ProtocolHandler.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -23,6 +23,8 @@ private:
     void onConnectButtonClicked();
     void onSendPart1ButtonClicked();
     void onSendPart2ButtonClicked();
+    void onSendCANMessageButtonClicked();
+    void onCANMessage(CANMessage& message);
 
     Ui::MainWindow *ui_;
     ProtocolHandler serialWrite_;

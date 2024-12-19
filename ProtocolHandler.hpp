@@ -6,7 +6,8 @@
 #include <QByteArray>
 #include <QDebug>
 
-#include "StreamDecoder.h"
+#include "StreamDecoder.hpp"
+#include "PacketParser.hpp"
 
 class ProtocolHandler : public QObject
 {
@@ -20,11 +21,16 @@ public:
     void closePort();
     bool isOpen() const;
     void writeData(const QByteArray &data);
+    void setCANMessageCb(const std::function<void(CANMessage&)> callback)
+    {
+        packetParser_.setCANMessageCb(callback);
+    }
 
 private:
     void onReadyRead();
 
     QSerialPort *serialPort_;
+    PacketParser packetParser_;
     StreamDecoder streamDecoder_;
 };
 
