@@ -14,9 +14,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets SerialPort)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        MainWindow.cpp
+        MainWindow.h
+        MainWindow.ui
         ProtocolHandler.cpp
         ProtocolHandler.h
         StreamDecoder.cpp
