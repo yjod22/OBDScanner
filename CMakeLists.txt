@@ -9,18 +9,28 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(TestBigEndian)
+test_big_endian(IS_BIG_ENDIAN)
+if (IS_BIG_ENDIAN)
+    message(STATUS "Target is Big Endian")
+else()
+    message(STATUS "Target is Little Endian")
+endif()
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets SerialPort)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets SerialPort)
 
 set(PROJECT_SOURCES
         main.cpp
-        MainWindow.cpp
         MainWindow.h
+        MainWindow.cpp
         MainWindow.ui
+        ProtocolHandler.hpp
         ProtocolHandler.cpp
-        ProtocolHandler.h
+        PacketParser.hpp
+        PacketParser.cpp
+        StreamDecoder.hpp
         StreamDecoder.cpp
-        StreamDecoder.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

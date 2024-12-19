@@ -1,4 +1,4 @@
-#include "StreamDecoder.h"
+#include "StreamDecoder.hpp"
 
 void StreamDecoder::reset()
 {
