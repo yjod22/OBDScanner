@@ -18,11 +18,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private:
     void onConnectButtonClicked();
     void onSendPart1ButtonClicked();
     void onSendPart2ButtonClicked();
 
-private:
     Ui::MainWindow *ui_;
     ProtocolHandler serialWrite_;
     ProtocolHandler protocolHandler_;
