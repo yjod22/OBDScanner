@@ -23,12 +23,10 @@ public:
     ~PacketParser() = default;
     void setCANMessageCb(const std::function<void(CANMessage&)> callback)
     {
-        CANMessageCb = callback;
+        canMessageCb = callback;
     }
     void parse(std::vector<uint8_t>& packet);
 
 private:
-    std::function<void(CANMessage&)> CANMessageCb;
-    static uint16_t toLittleEndian16(const uint8_t* data);
-    static uint32_t toLittleEndian32(const uint8_t* data);
+    std::function<void(CANMessage&)> canMessageCb;
 };
