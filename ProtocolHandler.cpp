@@ -75,17 +75,9 @@ void ProtocolHandler::onReadyRead()
             switch (result.state)
             {
                 case DecodeResult::Completed:
-                    qDebug() << "Decoded stream: ";
-                    for (uint8_t byte : result.data)
-                    {
-                        qDebug() << static_cast<int>(byte) << " ";
-                    }
-
-                    qDebug() << "Parsing packet...";
                     packetParser_.parse(result.data);
                     break;
                 case DecodeResult::Ongoing:
-                    qDebug() << "Waiting for more data...";
                     return;
                 case DecodeResult::Error:
                     qDebug() << "Error: Malformed stream!";

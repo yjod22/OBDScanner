@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if(!serialWrite_.isOpen())
     {
-        serialWrite_.openPort("COM7", 115200);
+        serialWrite_.openPort("COM7", 921600);
     }
 }
 
@@ -30,7 +30,7 @@ void MainWindow::onConnectButtonClicked()
 {
     if(!protocolHandler_.isOpen())
     {
-        protocolHandler_.openPort("COM8", 115200);
+        protocolHandler_.openPort("COM4", 921600);
     }
 }
 
@@ -68,14 +68,4 @@ void MainWindow::onSendCANMessageButtonClicked()
 {
     qDebug() << "msgCounter:" << static_cast<int>(message.msgCounter);
     qDebug() << "stdId:" << static_cast<int>(message.stdId);
-    qDebug() << "extId:" << static_cast<int>(message.extId);
-    qDebug() << "dlc:" << static_cast<int>(message.dlc);
-    qDebug() << "data[0]:" << static_cast<int>(message.data[0]);
-    qDebug() << "data[1]:" << static_cast<int>(message.data[1]);
-    qDebug() << "data[2]:" << static_cast<int>(message.data[2]);
-    qDebug() << "data[3]:" << static_cast<int>(message.data[3]);
-    qDebug() << "data[4]:" << static_cast<int>(message.data[4]);
-    qDebug() << "data[5]:" << static_cast<int>(message.data[5]);
-    qDebug() << "data[6]:" << static_cast<int>(message.data[6]);
-    qDebug() << "data[7]:" << static_cast<int>(message.data[7]);
 }

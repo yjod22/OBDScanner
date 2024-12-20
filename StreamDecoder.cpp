@@ -5,7 +5,6 @@ void StreamDecoder::reset()
     streamPtr_ = 0;
 }
 
-// StreamDecoder's decode implementation
 DecodeResult StreamDecoder::decode(const std::vector<uint8_t>& stream)
 {
     for(; streamPtr_ < stream.size() ; streamPtr_++)
@@ -66,4 +65,3 @@ bool StreamDecoder::cobsDecode(const std::vector<uint8_t>& encoded, std::vector<
 
     return true;
 }
-
