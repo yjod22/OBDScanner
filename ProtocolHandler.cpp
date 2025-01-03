@@ -4,6 +4,7 @@ ProtocolHandler::ProtocolHandler(QObject *parent)
     : QObject(parent), serialPort_(new QSerialPort(this))
 {
     connect(serialPort_, &QSerialPort::readyRead, this, &ProtocolHandler::onReadyRead);
+    connect(serialPort_, &QSerialPort::errorOccurred, this, &ProtocolHandler::onErrorOccurred);
 }
 
 ProtocolHandler::~ProtocolHandler()
@@ -23,16 +24,7 @@ bool ProtocolHandler::openPort(const QString &portName, qint32 baudRate)
     serialPort_->setStopBits(QSerialPort::OneStop);
     serialPort_->setFlowControl(QSerialPort::NoFlowControl);
 
-    if (serialPort_->open(QIODevice::ReadWrite))
-    {
-        qDebug() << "Port opened successfully!";
-        return true;
-    }
-    else
-    {
-        qDebug() << "Failed to open port:" << serialPort_->errorString();
-        return false;
-    }
+    return (serialPort_->open(QIODevice::ReadWrite));
 }
 
 void ProtocolHandler::closePort()
@@ -84,5 +76,13 @@ void ProtocolHandler::onReadyRead()
                     return;
             }
         }
+    }
+}
+
+void ProtocolHandler::onErrorOccurred(QSerialPort::SerialPortError error)
+{
+    if(error == QSerialPort::ResourceError)
+    {
+        cableDisconnectedCb_();
     }
 }

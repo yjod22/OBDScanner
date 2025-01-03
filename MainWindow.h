@@ -11,6 +11,13 @@ namespace Ui
 }
 QT_END_NAMESPACE
 
+enum class PortState
+{
+    IDLE = 0,
+    ACTIVATED,
+    DEACTIVATED
+};
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -24,9 +31,12 @@ private:
     void onSendPart1ButtonClicked();
     void onSendPart2ButtonClicked();
     void onSendCANMessageButtonClicked();
+    void runPortStateMachine();
     void onCANMessage(CANMessage& message);
+    void onCableDisconnected();
 
     Ui::MainWindow *ui_;
     ProtocolHandler serialWrite_;
     ProtocolHandler protocolHandler_;
+    PortState portState_{};
 };

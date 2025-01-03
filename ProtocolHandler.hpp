@@ -21,6 +21,10 @@ public:
     void closePort();
     bool isOpen() const;
     void writeData(const QByteArray &data);
+    void setCableDisconnectedCb(const std::function<void(void)> callback)
+    {
+        cableDisconnectedCb_ = callback;
+    }
     void setCANMessageCb(const std::function<void(CANMessage&)> callback)
     {
         packetParser_.setCANMessageCb(callback);
@@ -28,9 +32,11 @@ public:
 
 private:
     void onReadyRead();
+    void onErrorOccurred(QSerialPort::SerialPortError error);
 
     QSerialPort *serialPort_;
     PacketParser packetParser_;
     StreamDecoder streamDecoder_;
+    std::function<void(void)> cableDisconnectedCb_;
 };
 

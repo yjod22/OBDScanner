@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui_->sendCANMessageButton, &QPushButton::clicked, this, &MainWindow::onSendCANMessageButtonClicked);
 
     protocolHandler_.setCANMessageCb(std::bind(&MainWindow::onCANMessage, this, std::placeholders::_1));
+    protocolHandler_.setCableDisconnectedCb(std::bind(&MainWindow::onCableDisconnected, this));
 
     if(!serialWrite_.isOpen())
     {
@@ -28,12 +29,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::onConnectButtonClicked()
 {
-    if(!protocolHandler_.isOpen())
+    if(ui_->connectButton->text() == "Connect" && protocolHandler_.openPort("COM4", 921600))
     {
-        protocolHandler_.openPort("COM4", 921600);
+        portState_ = PortState::ACTIVATED;
     }
-}
 
+    if(ui_->connectButton->text() == "Disconnect")
+    {
+        portState_ = PortState::DEACTIVATED;
+    }
+
+    runPortStateMachine();
+}
 
 void MainWindow::onSendPart1ButtonClicked()
 {
@@ -63,9 +70,33 @@ void MainWindow::onSendCANMessageButtonClicked()
     }
 }
 
+void MainWindow::runPortStateMachine()
+{
+    switch(portState_)
+    {
+    case PortState::IDLE:
+        break;
 
- void MainWindow::onCANMessage(CANMessage& message)
+    case PortState::ACTIVATED:
+        ui_->connectButton->setText("Disconnect");
+        break;
+
+    case PortState::DEACTIVATED:
+        protocolHandler_.closePort();
+        ui_->connectButton->setText("Connect");
+        break;
+    }
+}
+
+void MainWindow::onCANMessage(CANMessage& message)
 {
     qDebug() << "msgCounter:" << static_cast<int>(message.msgCounter);
     qDebug() << "stdId:" << static_cast<int>(message.stdId);
+}
+
+
+void MainWindow::onCableDisconnected()
+{
+    portState_ = PortState::DEACTIVATED;
+    runPortStateMachine();
 }
