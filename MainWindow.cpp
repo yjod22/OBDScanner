@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui_(new Ui::MainWindow)
 {
     ui_->setupUi(this);
+    ui_->portComboBox->setCurrentIndex(7);
+    ui_->baudRateComboBox->setCurrentIndex(14);
 
     connect(ui_->connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
     connect(ui_->sendPart1Button, &QPushButton::clicked, this, &MainWindow::onSendPart1ButtonClicked);
@@ -34,7 +36,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::onConnectButtonClicked()
 {
-    if(ui_->connectButton->text() == "Connect" && protocolHandler_.openPort("COM8", 921600))
+    if(ui_->connectButton->text() == "Connect" &&
+       protocolHandler_.openPort(ui_->portComboBox->currentText(),
+                                 ui_->baudRateComboBox->currentText().toInt()))
     {
         portState_ = PortState::ACTIVATED;
     }
@@ -84,11 +88,15 @@ void MainWindow::runPortStateMachine()
 
     case PortState::ACTIVATED:
         ui_->connectButton->setText("Disconnect");
+        ui_->portComboBox->setDisabled(true);
+        ui_->baudRateComboBox->setDisabled(true);
         break;
 
     case PortState::DEACTIVATED:
         protocolHandler_.closePort();
         ui_->connectButton->setText("Connect");
+        ui_->portComboBox->setDisabled(false);
+        ui_->baudRateComboBox->setDisabled(false);
         break;
     }
 }
