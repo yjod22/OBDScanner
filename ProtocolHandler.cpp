@@ -36,6 +36,11 @@ void ProtocolHandler::closePort()
     }
 }
 
+bool ProtocolHandler::isOpen() const
+{
+    return serialPort_->isOpen();
+}
+
 void ProtocolHandler::writeData(const QByteArray &data)
 {
     if (serialPort_->isOpen())
@@ -46,11 +51,6 @@ void ProtocolHandler::writeData(const QByteArray &data)
     {
         qDebug() << "Port not open. Cannot write data.";
     }
-}
-
-bool ProtocolHandler::isOpen() const
-{
-    return serialPort_->isOpen();
 }
 
 void ProtocolHandler::onReadyRead()

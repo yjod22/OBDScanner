@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="connectButton">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>140</y>
+      <x>170</x>
+      <y>30</y>
       <width>191</width>
       <height>81</height>
      </rect>
@@ -27,56 +27,30 @@
      <string>Connect</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="sendPart1Button">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>140</y>
-      <width>191</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Send Part 1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="sendPart2Button">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>250</y>
-      <width>191</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Send Part 2</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="sendCANMessageButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>360</y>
+      <x>490</x>
+      <y>30</y>
       <width>191</width>
       <height>81</height>
      </rect>
     </property>
     <property name="text">
-     <string>Send a CAN Message</string>
+     <string>Send the test CAN Message</string>
     </property>
    </widget>
    <widget class="QComboBox" name="portComboBox">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>140</y>
+      <x>80</x>
+      <y>30</y>
       <width>71</width>
       <height>31</height>
      </rect>
     </property>
     <property name="currentText">
-     <string>COM8</string>
+     <string>COM1</string>
     </property>
     <item>
      <property name="text">
@@ -127,8 +101,8 @@
    <widget class="QComboBox" name="baudRateComboBox">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>190</y>
+      <x>80</x>
+      <y>80</y>
       <width>71</width>
       <height>31</height>
      </rect>
@@ -137,7 +111,7 @@
      <bool>true</bool>
     </property>
     <property name="currentText">
-     <string>921600</string>
+     <string>110</string>
     </property>
     <item>
      <property name="text">
@@ -218,8 +192,8 @@
    <widget class="QLabel" name="portLabel">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>140</y>
+      <x>30</x>
+      <y>30</y>
       <width>41</width>
       <height>31</height>
      </rect>
@@ -231,8 +205,8 @@
    <widget class="QLabel" name="speedLabel">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>190</y>
+      <x>30</x>
+      <y>80</y>
       <width>41</width>
       <height>31</height>
      </rect>

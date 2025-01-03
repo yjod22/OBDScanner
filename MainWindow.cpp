@@ -11,8 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui_->baudRateComboBox->setCurrentIndex(14);
 
     connect(ui_->connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
-    connect(ui_->sendPart1Button, &QPushButton::clicked, this, &MainWindow::onSendPart1ButtonClicked);
-    connect(ui_->sendPart2Button, &QPushButton::clicked, this, &MainWindow::onSendPart2ButtonClicked);
     connect(ui_->sendCANMessageButton, &QPushButton::clicked, this, &MainWindow::onSendCANMessageButtonClicked);
 
     protocolHandler_.setCANMessageCb(std::bind(&MainWindow::onCANMessage, this, std::placeholders::_1));
@@ -49,25 +47,6 @@ void MainWindow::onConnectButtonClicked()
     }
 
     runPortStateMachine();
-}
-
-void MainWindow::onSendPart1ButtonClicked()
-{
-    if(serialWrite_.isOpen())
-    {
-        QByteArray dataToSend = QByteArray::fromRawData("\x02\x07\x01\x00\x03\x11\x22\x02", 8);
-        serialWrite_.writeData(dataToSend);
-    }
-}
-
-
-void MainWindow::onSendPart2ButtonClicked()
-{
-    if(serialWrite_.isOpen())
-    {
-        QByteArray dataToSend = QByteArray::fromRawData("\x33\x00", 2);
-        serialWrite_.writeData(dataToSend);
-    }
 }
 
 void MainWindow::onSendCANMessageButtonClicked()

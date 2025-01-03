@@ -28,8 +28,6 @@ public:
 
 private:
     void onConnectButtonClicked();
-    void onSendPart1ButtonClicked();
-    void onSendPart2ButtonClicked();
     void onSendCANMessageButtonClicked();
     void runPortStateMachine();
     void onCANMessage(CANMessage& message);
