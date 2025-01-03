@@ -24,6 +24,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    if(protocolHandler_.isOpen())
+    {
+        protocolHandler_.closePort();
+    }
+
     delete ui_;
 }
 
