@@ -67,6 +67,8 @@ void MainWindow::runPortStateMachine()
 
     case PortState::ACTIVATED:
         ui_->connectButton->setText("Disconnect");
+        ui_->tableWidget->clearContents();
+        ui_->tableWidget->setRowCount(0);
         ui_->portComboBox->setDisabled(true);
         ui_->baudRateComboBox->setDisabled(true);
         break;
@@ -82,10 +84,25 @@ void MainWindow::runPortStateMachine()
 
 void MainWindow::onCANMessage(CANMessage& message)
 {
-    qDebug() << "msgCounter:" << static_cast<int>(message.msgCounter);
-    qDebug() << "stdId:" << static_cast<int>(message.stdId);
-}
+    ui_->tableWidget->insertRow(0);
+    ui_->tableWidget->setVerticalHeaderLabels(QStringList("message"));
 
+    for(int i=0; i<ui_->tableWidget->columnCount(); i++)
+    {
+        ui_->tableWidget->setItem(0, i, new QTableWidgetItem());
+    }
+    ui_->tableWidget->item(0, 0)->setText(QString::number(message.msgCounter));
+    ui_->tableWidget->item(0, 1)->setText(QString::number(message.stdId));
+    ui_->tableWidget->item(0, 2)->setText(QString::number(message.extId));
+    ui_->tableWidget->item(0, 3)->setText(QString::number(message.ide));
+    ui_->tableWidget->item(0, 4)->setText(QString::number(message.rtr));
+    ui_->tableWidget->item(0, 5)->setText(QString::number(message.dlc));
+    for(int i=0; i<8; i++)
+    {
+        ui_->tableWidget->item(0, 6+i)->setText(QString::number(message.data[i]));
+    }
+    ui_->tableWidget->item(0, 14)->setText(QString::number(message.fmi));
+}
 
 void MainWindow::onCableDisconnected()
 {
