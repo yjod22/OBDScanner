@@ -32,7 +32,6 @@ void ProtocolHandler::closePort()
     if (serialPort_->isOpen())
     {
         serialPort_->close();
-        qDebug() << "Port closed!";
     }
 }
 

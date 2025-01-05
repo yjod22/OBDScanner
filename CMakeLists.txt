@@ -31,6 +31,7 @@ set(PROJECT_SOURCES
         PacketParser.cpp
         StreamDecoder.hpp
         StreamDecoder.cpp
+        SystemMacro.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
