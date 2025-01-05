@@ -11,15 +11,19 @@ MainWindow::MainWindow(QWidget *parent)
     ui_->baudRateComboBox->setCurrentIndex(14);
 
     connect(ui_->connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
-    connect(ui_->sendCANMessageButton, &QPushButton::clicked, this, &MainWindow::onSendCANMessageButtonClicked);
 
     protocolHandler_.setCANMessageCb(std::bind(&MainWindow::onCANMessage, this, std::placeholders::_1));
     protocolHandler_.setCableDisconnectedCb(std::bind(&MainWindow::onCableDisconnected, this));
 
+#if DEBUG_MODE
+    connect(ui_->sendCANMessageButton, &QPushButton::clicked, this, &MainWindow::onSendCANMessageButtonClicked);
     if(!serialWrite_.isOpen())
     {
         serialWrite_.openPort("COM7", 921600);
     }
+#else
+    ui_->sendCANMessageButton->hide();
+#endif
 }
 
 MainWindow::~MainWindow()
@@ -49,6 +53,7 @@ void MainWindow::onConnectButtonClicked()
     runPortStateMachine();
 }
 
+#if DEBUG_MODE
 void MainWindow::onSendCANMessageButtonClicked()
 {
     if(serialWrite_.isOpen())
@@ -57,6 +62,7 @@ void MainWindow::onSendCANMessageButtonClicked()
         serialWrite_.writeData(dataToSend);
     }
 }
+#endif
 
 void MainWindow::runPortStateMachine()
 {

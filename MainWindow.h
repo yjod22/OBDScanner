@@ -3,6 +3,7 @@
 #include <QMainWindow>
 
 #include "ProtocolHandler.hpp"
+#include "SystemMacro.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -28,13 +29,17 @@ public:
 
 private:
     void onConnectButtonClicked();
-    void onSendCANMessageButtonClicked();
     void runPortStateMachine();
     void onCANMessage(CANMessage& message);
     void onCableDisconnected();
 
     Ui::MainWindow *ui_;
-    ProtocolHandler serialWrite_;
     ProtocolHandler protocolHandler_;
     PortState portState_{};
+
+#if DEBUG_MODE
+    void onSendCANMessageButtonClicked();
+    ProtocolHandler serialWrite_;
+#endif
+
 };
