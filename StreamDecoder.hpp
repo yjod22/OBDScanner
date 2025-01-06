@@ -21,5 +21,5 @@ private:
     bool cobsDecode(const std::vector<uint8_t>& encoded, std::vector<uint8_t>& decoded);
 
     std::vector<uint8_t> buffer_;
-    uint8_t streamPtr_{};
+    uint32_t streamPtr_{};
 };
