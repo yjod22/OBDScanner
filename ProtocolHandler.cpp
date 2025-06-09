@@ -57,7 +57,7 @@ void ProtocolHandler::onReadyRead()
     if (serialPort_->isOpen())
     {
         QByteArray qStream = serialPort_->readAll();
-        std::vector<uint8_t>stream(qStream.begin(), qStream.end());
+        std::vector<uint8_t> stream(qStream.begin(), qStream.end());
         streamDecoder_.reset();
 
         for (;;)
@@ -65,14 +65,14 @@ void ProtocolHandler::onReadyRead()
             DecodeResult result = streamDecoder_.decode(stream);
             switch (result.state)
             {
-                case DecodeResult::Completed:
-                    packetParser_.parse(result.data);
-                    break;
-                case DecodeResult::Ongoing:
-                    return;
-                case DecodeResult::Error:
-                    qDebug() << "Error: Malformed stream!";
-                    return;
+            case DecodeResult::Completed:
+                packetParser_.parse(result.data);
+                break;
+            case DecodeResult::Ongoing:
+                return;
+            case DecodeResult::Error:
+                qDebug() << "Error: Malformed stream!";
+                return;
             }
         }
     }
@@ -80,7 +80,7 @@ void ProtocolHandler::onReadyRead()
 
 void ProtocolHandler::onErrorOccurred(QSerialPort::SerialPortError error)
 {
-    if(error == QSerialPort::ResourceError)
+    if (error == QSerialPort::ResourceError)
     {
         cableDisconnectedCb_();
     }

@@ -3,8 +3,7 @@
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui_(new Ui::MainWindow)
+    : QMainWindow(parent), ui_(new Ui::MainWindow)
 {
     ui_->setupUi(this);
     ui_->portComboBox->setCurrentIndex(7);
@@ -17,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 #if DEBUG_MODE
     connect(ui_->sendCANMessageButton, &QPushButton::clicked, this, &MainWindow::onSendCANMessageButtonClicked);
-    if(!serialWrite_.isOpen())
+    if (!serialWrite_.isOpen())
     {
         serialWrite_.openPort("COM7", 921600);
     }
@@ -28,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    if(protocolHandler_.isOpen())
+    if (protocolHandler_.isOpen())
     {
         protocolHandler_.closePort();
     }
@@ -38,14 +37,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::onConnectButtonClicked()
 {
-    if(ui_->connectButton->text() == "Connect" &&
-       protocolHandler_.openPort(ui_->portComboBox->currentText(),
-                                 ui_->baudRateComboBox->currentText().toInt()))
+    if (ui_->connectButton->text() == "Connect" &&
+        protocolHandler_.openPort(ui_->portComboBox->currentText(),
+                                  ui_->baudRateComboBox->currentText().toInt()))
     {
         portState_ = PortState::ACTIVATED;
     }
 
-    if(ui_->connectButton->text() == "Disconnect")
+    if (ui_->connectButton->text() == "Disconnect")
     {
         portState_ = PortState::DEACTIVATED;
     }
@@ -56,7 +55,7 @@ void MainWindow::onConnectButtonClicked()
 #if DEBUG_MODE
 void MainWindow::onSendCANMessageButtonClicked()
 {
-    if(serialWrite_.isOpen())
+    if (serialWrite_.isOpen())
     {
         QByteArray dataToSend = QByteArray::fromRawData("\x02\x01\x02\x02\x01\x01\x02\x03\x01\x01\x0D\x04\x05\x06\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF7\x07\x00", 24);
         serialWrite_.writeData(dataToSend);
@@ -66,7 +65,7 @@ void MainWindow::onSendCANMessageButtonClicked()
 
 void MainWindow::runPortStateMachine()
 {
-    switch(portState_)
+    switch (portState_)
     {
     case PortState::IDLE:
         break;
@@ -88,12 +87,12 @@ void MainWindow::runPortStateMachine()
     }
 }
 
-void MainWindow::onCANMessage(CANMessage& message)
+void MainWindow::onCANMessage(CANMessage &message)
 {
     ui_->tableWidget->insertRow(0);
     ui_->tableWidget->setVerticalHeaderLabels(QStringList("message"));
 
-    for(int i=0; i<ui_->tableWidget->columnCount(); i++)
+    for (int i = 0; i < ui_->tableWidget->columnCount(); i++)
     {
         ui_->tableWidget->setItem(0, i, new QTableWidgetItem());
     }
@@ -103,9 +102,9 @@ void MainWindow::onCANMessage(CANMessage& message)
     ui_->tableWidget->item(0, 3)->setText(QString::number(message.ide));
     ui_->tableWidget->item(0, 4)->setText(QString::number(message.rtr));
     ui_->tableWidget->item(0, 5)->setText(QString::number(message.dlc));
-    for(int i=0; i<8; i++)
+    for (int i = 0; i < 8; i++)
     {
-        ui_->tableWidget->item(0, 6+i)->setText(QString::number(message.data[i]));
+        ui_->tableWidget->item(0, 6 + i)->setText(QString::number(message.data[i]));
     }
     ui_->tableWidget->item(0, 14)->setText(QString::number(message.fmi));
 }

@@ -2,7 +2,7 @@
 
 #include "PacketParser.hpp"
 
-void PacketParser::parse(std::vector<uint8_t>& packet)
+void PacketParser::parse(std::vector<uint8_t> &packet)
 {
     CANMessage message{};
     size_t offset{};
@@ -25,7 +25,7 @@ void PacketParser::parse(std::vector<uint8_t>& packet)
 
     message.fmi = packet[offset];
 
-    if(canMessageCb != nullptr)
+    if (canMessageCb != nullptr)
     {
         canMessageCb(message);
     }
