@@ -25,7 +25,7 @@ public:
     {
         cableDisconnectedCb_ = callback;
     }
-    void setCANMessageCb(const std::function<void(CANMessage&)> callback)
+    void setCANMessageCb(const std::function<void(CANMessage &)> callback)
     {
         packetParser_.setCANMessageCb(callback);
     }
@@ -39,4 +39,3 @@ private:
     StreamDecoder streamDecoder_;
     std::function<void(void)> cableDisconnectedCb_;
 };
-

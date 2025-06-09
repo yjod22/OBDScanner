@@ -30,7 +30,7 @@ public:
 private:
     void onConnectButtonClicked();
     void runPortStateMachine();
-    void onCANMessage(CANMessage& message);
+    void onCANMessage(CANMessage &message);
     void onCableDisconnected();
 
     Ui::MainWindow *ui_;
@@ -41,5 +41,4 @@ private:
     void onSendCANMessageButtonClicked();
     ProtocolHandler serialWrite_;
 #endif
-
 };
