@@ -2,7 +2,7 @@
 
 #include "PacketParser.hpp"
 
-void PacketParser::parse(std::vector<uint8_t> &packet)
+void PacketParser::parse(std::vector<uint8_t>& packet)
 {
     CANMessage message{};
     size_t offset{};

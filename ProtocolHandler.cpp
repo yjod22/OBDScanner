@@ -1,7 +1,6 @@
 #include "ProtocolHandler.hpp"
 
-ProtocolHandler::ProtocolHandler(QObject *parent)
-    : QObject(parent), serialPort_(new QSerialPort(this))
+ProtocolHandler::ProtocolHandler(QObject* parent) : QObject(parent), serialPort_(new QSerialPort(this))
 {
     connect(serialPort_, &QSerialPort::readyRead, this, &ProtocolHandler::onReadyRead);
     connect(serialPort_, &QSerialPort::errorOccurred, this, &ProtocolHandler::onErrorOccurred);
@@ -15,7 +14,7 @@ ProtocolHandler::~ProtocolHandler()
     }
 }
 
-bool ProtocolHandler::openPort(const QString &portName, qint32 baudRate)
+bool ProtocolHandler::openPort(const QString& portName, qint32 baudRate)
 {
     serialPort_->setPortName(portName);
     serialPort_->setBaudRate(baudRate);
@@ -35,12 +34,9 @@ void ProtocolHandler::closePort()
     }
 }
 
-bool ProtocolHandler::isOpen() const
-{
-    return serialPort_->isOpen();
-}
+bool ProtocolHandler::isOpen() const { return serialPort_->isOpen(); }
 
-void ProtocolHandler::writeData(const QByteArray &data)
+void ProtocolHandler::writeData(const QByteArray& data)
 {
     if (serialPort_->isOpen())
     {

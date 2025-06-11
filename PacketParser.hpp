@@ -21,12 +21,9 @@ class PacketParser
 public:
     PacketParser() = default;
     ~PacketParser() = default;
-    void setCANMessageCb(const std::function<void(CANMessage &)> callback)
-    {
-        canMessageCb = callback;
-    }
-    void parse(std::vector<uint8_t> &packet);
+    void setCANMessageCb(const std::function<void(CANMessage&)> callback) { canMessageCb = callback; }
+    void parse(std::vector<uint8_t>& packet);
 
 private:
-    std::function<void(CANMessage &)> canMessageCb;
+    std::function<void(CANMessage&)> canMessageCb;
 };

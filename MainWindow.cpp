@@ -2,8 +2,7 @@
 
 #include "MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui_(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui_(new Ui::MainWindow)
 {
     ui_->setupUi(this);
     ui_->portComboBox->setCurrentIndex(7);
@@ -38,8 +37,7 @@ MainWindow::~MainWindow()
 void MainWindow::onConnectButtonClicked()
 {
     if (ui_->connectButton->text() == "Connect" &&
-        protocolHandler_.openPort(ui_->portComboBox->currentText(),
-                                  ui_->baudRateComboBox->currentText().toInt()))
+        protocolHandler_.openPort(ui_->portComboBox->currentText(), ui_->baudRateComboBox->currentText().toInt()))
     {
         portState_ = PortState::ACTIVATED;
     }
@@ -57,7 +55,8 @@ void MainWindow::onSendCANMessageButtonClicked()
 {
     if (serialWrite_.isOpen())
     {
-        QByteArray dataToSend = QByteArray::fromRawData("\x02\x01\x02\x02\x01\x01\x02\x03\x01\x01\x0D\x04\x05\x06\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF7\x07\x00", 24);
+        QByteArray dataToSend = QByteArray::fromRawData(
+            "\x02\x01\x02\x02\x01\x01\x02\x03\x01\x01\x0D\x04\x05\x06\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF7\x07\x00", 24);
         serialWrite_.writeData(dataToSend);
     }
 }
@@ -87,7 +86,7 @@ void MainWindow::runPortStateMachine()
     }
 }
 
-void MainWindow::onCANMessage(CANMessage &message)
+void MainWindow::onCANMessage(CANMessage& message)
 {
     ui_->tableWidget->insertRow(0);
     ui_->tableWidget->setVerticalHeaderLabels(QStringList("message"));
