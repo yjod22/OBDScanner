@@ -1,0 +1,32 @@
+# See https://clang.llvm.org/docs/ClangFormatStyleOptions.html for more options
+
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+UseTab: Never
+
+IndentWidth: 4
+AccessModifierOffset: -4
+IndentCasLabels: false
+NamespaceIndentation: All
+ColumnLimit: 120
+IndentPPDirectives: AfterHash
+
+MaxEmptyLinesToKeep: 1
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+BreakBeforeBraces: Allman
+
+PointerAlignment: Left
+
+SpaceBeforeAssignmentOperators: true
+SapeceBeforeParens: ControlStatements
+SpaceAfterCStyleCast: false
+
+AlignAfterOpenBracket: AlwaysBreak
+BreakConstructorInitializers: AfterColon
+AlwaysBreakTemplateDeclarations: Yes
+PackConstructorInitializers: NextLine
+
+AllowShortFunctionsOnSingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLambdasOnASingleLine: Empty

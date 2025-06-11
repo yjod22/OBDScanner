@@ -1,11 +1,8 @@
 #include "StreamDecoder.hpp"
 
-void StreamDecoder::reset()
-{
-    streamPtr_ = 0;
-}
+void StreamDecoder::reset() { streamPtr_ = 0; }
 
-DecodeResult StreamDecoder::decode(const std::vector<uint8_t> &stream)
+DecodeResult StreamDecoder::decode(const std::vector<uint8_t>& stream)
 {
     for (; streamPtr_ < stream.size(); streamPtr_++)
     {
@@ -33,7 +30,7 @@ DecodeResult StreamDecoder::decode(const std::vector<uint8_t> &stream)
     return {DecodeResult::Ongoing, {}};
 }
 
-bool StreamDecoder::cobsDecode(const std::vector<uint8_t> &encoded, std::vector<uint8_t> &decoded)
+bool StreamDecoder::cobsDecode(const std::vector<uint8_t>& encoded, std::vector<uint8_t>& decoded)
 {
     if (encoded.empty())
     {

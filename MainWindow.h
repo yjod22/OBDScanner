@@ -24,16 +24,16 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
 private:
     void onConnectButtonClicked();
     void runPortStateMachine();
-    void onCANMessage(CANMessage &message);
+    void onCANMessage(CANMessage& message);
     void onCableDisconnected();
 
-    Ui::MainWindow *ui_;
+    Ui::MainWindow* ui_;
     ProtocolHandler protocolHandler_;
     PortState portState_{};
 
