@@ -21,17 +21,17 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets SerialPort)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets SerialPort)
 
 set(PROJECT_SOURCES
-        main.cpp
-        MainWindow.h
-        MainWindow.cpp
-        MainWindow.ui
-        ProtocolHandler.hpp
-        ProtocolHandler.cpp
-        PacketParser.hpp
-        PacketParser.cpp
-        StreamDecoder.hpp
-        StreamDecoder.cpp
-        SystemMacro.h
+    src/main.cpp
+    src/MainWindow.h
+    src/MainWindow.cpp
+    src/MainWindow.ui
+    src/ProtocolHandler.hpp
+    src/ProtocolHandler.cpp
+    src/PacketParser.hpp
+    src/PacketParser.cpp
+    src/StreamDecoder.hpp
+    src/StreamDecoder.cpp
+    src/SystemMacro.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
