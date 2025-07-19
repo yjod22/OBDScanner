@@ -95,17 +95,17 @@ void MainWindow::onCANMessage(CANMessage& message)
     {
         ui_->tableWidget->setItem(0, i, new QTableWidgetItem());
     }
-    ui_->tableWidget->item(0, 0)->setText(QString::number(message.msgCounter));
-    ui_->tableWidget->item(0, 1)->setText(QString::number(message.stdId));
-    ui_->tableWidget->item(0, 2)->setText(QString::number(message.extId));
-    ui_->tableWidget->item(0, 3)->setText(QString::number(message.ide));
-    ui_->tableWidget->item(0, 4)->setText(QString::number(message.rtr));
-    ui_->tableWidget->item(0, 5)->setText(QString::number(message.dlc));
+    ui_->tableWidget->item(0, 0)->setText(QString::number(message.getMsgCounter()));
+    ui_->tableWidget->item(0, 1)->setText(QString::number(message.getStdId()));
+    ui_->tableWidget->item(0, 2)->setText(QString::number(message.getExtId()));
+    ui_->tableWidget->item(0, 3)->setText(QString::number(message.getIde()));
+    ui_->tableWidget->item(0, 4)->setText(QString::number(message.getRtr()));
+    ui_->tableWidget->item(0, 5)->setText(QString::number(message.getDlc()));
     for (int i = 0; i < 8; i++)
     {
-        ui_->tableWidget->item(0, 6 + i)->setText(QString::number(message.data[i]));
+        ui_->tableWidget->item(0, 6 + i)->setText(QString::number(message.getData()[i]));
     }
-    ui_->tableWidget->item(0, 14)->setText(QString::number(message.fmi));
+    ui_->tableWidget->item(0, 14)->setText(QString::number(message.getFmi()));
 }
 
 void MainWindow::onCableDisconnected()
