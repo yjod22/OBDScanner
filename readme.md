@@ -3,12 +3,19 @@
 ## Table of Contents
 
 [1. Functionalities](#1-functionalities)
+
 [2. SW Architecture](#2-sw-architecture)
+
 [3. SW Units](#3-sw-units)
+
 &nbsp;&nbsp;[3.1 Main Window](#31-main-window)
+
 &nbsp;&nbsp;[3.2 Protocol Handler](#32-protocol-handler)
+
 &nbsp;&nbsp;[3.3 Packet Parser](#33-packet-parser)
+
 &nbsp;&nbsp;[3.4 Stream Decoder](#34-stream-decoder)
+
 
 ## 1. Functionalities
 
